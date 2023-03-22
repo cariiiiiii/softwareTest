@@ -1,25 +1,58 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-/***
- *
- * @author tiger
- * @date 2021年3月4日-下午8:43:13
- * @description 三角形测试用例
- */
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+
+import java.text.ParseException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@DisplayName(value="三角形边界测试")
 class TriangleTest {
-    @Test
-    @DisplayName("输入错误")
-    void parameters_error_test() {
-        Triangle triangle = new Triangle();
-        String type = triangle.classify(0, 4, 5);
-        assertEquals("输入错误", type);
+    @DisplayName(value="三角形一般边界测试用例")
+    @ParameterizedTest
+    @CsvFileSource(resources = "/fileTest1.csv",numLinesToSkip =0,encoding = "UTF-8")
+    void fileTest1(int a, int b,int c,String expected) throws ParseException {
+
+        Triangle triangle=new Triangle();
+
+        String type = triangle.classify(a, b, c);
+
+        assertEquals(expected, type);
     }
-    @Test
-    @DisplayName("不等边三角形")
-    void scalene_test() {
-        Triangle triangle = new Triangle();
-        String type = triangle.classify(3, 4, 6);
-        assertEquals("不等边三角形", type);
+
+    @DisplayName(value="三角形健壮性最坏情况测试用例")
+    @ParameterizedTest
+    @CsvFileSource(resources = "/fileTest2.csv",numLinesToSkip =0,encoding = "UTF-8")
+    void fileTest2(int a, int b,int c,String expected) throws ParseException {
+
+        Triangle triangle=new Triangle();
+
+        String type = triangle.classify(a, b, c);
+
+        assertEquals(expected, type);
+    }
+
+    @DisplayName("三角形健壮测试用例")
+    @ParameterizedTest
+    @CsvFileSource(resources = "/fileTest3.csv",numLinesToSkip =0,encoding = "UTF-8")
+    void fileTest3(int a, int b,int c,String expected) throws ParseException {
+
+        Triangle triangle=new Triangle();
+
+        String type = triangle.classify(a, b, c);
+
+        assertEquals(expected, type);
+    }
+
+    @DisplayName(value="三角形最坏情况测试用例")
+    @ParameterizedTest
+    @CsvFileSource(resources = "/fileTest4.csv",numLinesToSkip =0,encoding = "UTF-8")
+    void fileTest4(int a, int b,int c,String expected) throws ParseException {
+
+        Triangle triangle=new Triangle();
+
+        String type = triangle.classify(a, b, c);
+
+        assertEquals(expected, type);
     }
 }
